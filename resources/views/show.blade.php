@@ -51,6 +51,12 @@
                         {{$coupon->max_redeem_per_user}}
                     </div>
                 </div>
+                <li class="list-group-item">
+                    <form method="post" action="/coupons/{{$coupon->id}}/delete">
+                        @csrf
+                        <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
+                    </form>
+                </li>
             </div>
         </div>
     </div>
