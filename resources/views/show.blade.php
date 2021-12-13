@@ -56,6 +56,7 @@
                         @csrf
                         <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
                     </form>
+                    <a href="/coupons/{{$coupon->id}}/edit" class="btn btn-primary my-2 btn-sm float-right">EDIT</a>
                 </li>
             </div>
         </div>
