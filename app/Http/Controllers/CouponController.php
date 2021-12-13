@@ -34,4 +34,9 @@ class CouponController extends Controller
         session()->flash('success', 'Coupon created successfully.');
         return redirect('/coupons');
     }
+
+    public function show(Coupon $coupon)
+    {
+        return view('show')->with('coupon', $coupon);
+    }
 }

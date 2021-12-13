@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/coupons', 'CouponController@index');
 Route::get('/coupons/create', 'CouponController@create');
 Route::post('/coupons/store', 'CouponController@store');
+Route::get('/coupons/{coupon}', 'CouponController@show');
