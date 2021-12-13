@@ -1,6 +1,6 @@
 @extends('layout.coupon')
 
-@section('content')
+@section('CouponContent')
     <div class="container">
         <h1 class="text-center my-5">
             {{$coupon->name}}

@@ -1,6 +1,6 @@
 @extends('layout.coupon')
 <title>Coupon Management System</title>
-@section('content')
+@section('CouponContent')
     <div class="container">
         <h1 class="text-center my-5" >
             Coupons

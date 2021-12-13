@@ -1,5 +1,5 @@
 @extends('layout.coupon')
-@section('content')
+@section('CouponContent')
     <h1 class="text-center my-5">
         Edit Coupon
     </h1>
