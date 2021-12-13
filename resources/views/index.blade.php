@@ -14,6 +14,7 @@
                             @foreach($coupons as $coupon)
                                 <li class="list-group-item">
                                     {{$coupon->name}}
+                                    <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
                                 </li>
                             @endforeach
                         </ul>
