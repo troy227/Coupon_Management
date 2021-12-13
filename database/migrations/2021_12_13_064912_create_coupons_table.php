@@ -18,11 +18,11 @@ class CreateCouponsTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('description');
-            $table->date('valid_from');
-            $table->date('valid_until');
-            $table->integer('amount');
-            $table->integer('max_redeem');
-            $table->integer('max_redeem_per_user');
+            $table->dateTime('valid_from');
+            $table->dateTime('valid_until');
+            $table->unsignedInteger('amount');
+            $table->unsignedInteger('max_redeem');
+            $table->unsignedInteger('max_redeem_per_user');
             $table->timestamps();
         });
     }

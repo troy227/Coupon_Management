@@ -1,6 +1,8 @@
 @extends('layout.coupon')
 @section('content')
-    <h1 class="text-center my-5">Edit Coupon</h1>
+    <h1 class="text-center my-5">
+        Edit Coupon
+    </h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card-body">
@@ -36,29 +38,29 @@
                             <div class="card-header">
                                 Valid From
                             </div>
-                            <input type="text" placeholder="Valid From"
+                            <input type="date" placeholder="Valid From"
                                    onfocus="(this.type='date')" class="form-control" name="valid_from"
                                    value="{{$coupon->valid_from}}">
                             <div class="card-header">
                                 Valid Until
                             </div>
-                            <input type="text" placeholder="Valid Until"
+                            <input type="date" placeholder="Valid Until"
                                    onfocus="(this.type='date')" class="form-control" name="valid_until"
                                    value="{{$coupon->valid_until}}">
                             <div class="card-header">
                                 Coupon Amount
                             </div>
-                            <input type="text" class="form-control" name="amount" placeholder="Coupon Amount"
+                            <input type="number" class="form-control" name="amount" placeholder="Coupon Amount"
                                    value="{{$coupon->amount}}">
                             <div class="card-header">
                                 Max Redeems
                             </div>
-                            <input type="text" class="form-control" name="max_redeem" placeholder="Max Redeem"
+                            <input type="number" class="form-control" name="max_redeem" placeholder="Max Redeem"
                                    value="{{$coupon->max_redeem}}">
                             <div class="card-header">
                                 Max Redeem per User
                             </div>
-                            <input type="text" class="form-control" name="max_redeem_per_user" placeholder="Max Redeem Per User"
+                            <input type="number" class="form-control" name="max_redeem_per_user" placeholder="Max Redeem Per User"
                                    value="{{$coupon->max_redeem_per_user}}">
                             <div class="form-group text-center">
                                 <button type="submit" class="btn btn-success">

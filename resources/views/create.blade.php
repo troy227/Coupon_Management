@@ -16,10 +16,9 @@
                                         {{$error}}
                                     </li>
                                 @endforeach
-                                @endif
                             </ul>
-
                         </div>
+                    @endif
                         <form action="/coupons/store" method="POST">
                             @csrf
                             <div class="form-group">

@@ -2,7 +2,9 @@
 <title>Coupon Management System</title>
 @section('content')
     <div class="container">
-        <h1 class="text-center my-5" >Coupons</h1>
+        <h1 class="text-center my-5" >
+            Coupons
+        </h1>
         <div class="row justify-content-center">
             <div class="col-md8 offset-md2">
                 <div class="card card-default">
