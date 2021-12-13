@@ -15,3 +15,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/coupons', 'CouponController@index');
+Route::get('/coupons/create', 'CouponController@create');
+Route::post('/coupons/store', 'CouponController@store');

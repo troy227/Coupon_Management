@@ -12,4 +12,26 @@ class CouponController extends Controller
         $coupons=Coupon::all();
         return view('index')->with('coupons', $coupons);
     }
+
+    public function create()
+    {
+        return view('create');
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'code' => 'required',
+            'description' => 'required',
+            'valid_from' => 'required|before:valid_until|date|date_format:Y-m-d',
+            'valid_until' => 'required|after:valid_from|date|date_format:Y-m-d',
+            'amount' => 'required|integer|gt:0',
+            'max_redeem' => 'required|gte:max_redeem_per_user|integer|gt:0',
+            'max_redeem_per_user' => 'required|lte:max_redeem|integer|gt:0'
+        ]);
+        Coupon::create($request->all());
+        session()->flash('success', 'Coupon created successfully.');
+        return redirect('/coupons');
+    }
 }
