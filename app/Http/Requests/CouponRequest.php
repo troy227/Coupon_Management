@@ -11,10 +11,6 @@ class CouponRequest extends FormRequest
      *
      * @return bool
      */
-    public function validated()
-    {
-        return parent::validated();
-    }
 
     public function authorize()
     {
