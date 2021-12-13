@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\CouponRequest;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
 
@@ -18,18 +18,9 @@ class CouponController extends Controller
         return view('create');
     }
 
-    public function store(Request $request)
+    public function store(CouponRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required',
-            'description' => 'required',
-            'valid_from' => 'required|before:valid_until|date|date_format:Y-m-d',
-            'valid_until' => 'required|after:valid_from|date|date_format:Y-m-d',
-            'amount' => 'required|integer|gt:0',
-            'max_redeem' => 'required|gte:max_redeem_per_user|integer|gt:0',
-            'max_redeem_per_user' => 'required|lte:max_redeem|integer|gt:0'
-        ]);
+        $request->validated();
         Coupon::create($request->all());
         session()->flash('success', 'Coupon created successfully.');
         return redirect('/coupons');
@@ -51,18 +42,9 @@ class CouponController extends Controller
         return view('edit')->with('coupon', $coupon);
     }
 
-    public function update(Coupon $coupon, Request $request)
+    public function update(Coupon $coupon, CouponRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'code' => 'required',
-            'description' => 'required',
-            'valid_from' => 'required|before:valid_until|date|date_format:Y-m-d',
-            'valid_until' => 'required|after:valid_from|date|date_format:Y-m-d',
-            'amount' => 'required|integer|gt:0',
-            'max_redeem' => 'required|gte:max_redeem_per_user|integer|gt:0',
-            'max_redeem_per_user' => 'required|lte:max_redeem|integer|gt:0'
-        ]);
+        $request->validated();
         Coupon::whereId($coupon->id)->update($request->except(['_token']));
         session()->flash('success', 'Coupon updated successfully.');
         return redirect('/coupons');

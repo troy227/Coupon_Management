@@ -32,7 +32,7 @@
             {{session()->get('success')}}
         </div>
     @endif
-    @yield('content')
+    @yield('CouponContent')
 </div>
 </body>
 </html>
