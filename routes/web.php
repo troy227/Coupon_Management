@@ -21,6 +21,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/coupons', 'CouponController@index');
     Route::get('/coupons/{coupon}', 'CouponController@show');
+    Route::get('/user/{user}/details', 'UserController@showDetails');
 
 });
 

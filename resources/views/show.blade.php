@@ -60,6 +60,10 @@
                     <a href="/coupons/{{$coupon->id}}/edit" class="btn btn-primary my-2 btn-sm float-right">EDIT</a>
                 </li>
                 @endif
+                <div class="card-header">
+                    Created by :
+                    <a href="/user/{{$coupon->user()->pluck('id')[0]}}">{{$coupon->user()->get()->pluck('name')[0]}}</a>
+                </div>
             </div>
         </div>
     </div>
