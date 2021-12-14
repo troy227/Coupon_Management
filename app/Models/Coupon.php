@@ -12,4 +12,12 @@ class Coupon extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function can_be_redeemed($user_id)
+    {
+        if (str_contains($this->code, (string)$user_id)) {
+            return true;
+        }
+        return false;
+    }
 }
