@@ -62,7 +62,7 @@
                 @endif
                 <div class="card-header">
                     Created by :
-                    <a href="/user/{{$coupon->user()->pluck('id')[0]}}">{{$coupon->user()->get()->pluck('name')[0]}}</a>
+                    <a href="/user/{{$coupon->user()->pluck('id')[0]}}/details">{{$coupon->user()->get()->pluck('name')[0]}}</a>
                 </div>
             </div>
         </div>

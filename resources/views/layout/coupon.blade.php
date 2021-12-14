@@ -24,6 +24,9 @@
                     <a class="nav-link active" aria-current="page" href="/coupons/create">Create</a>
                 </li>
                 @endif
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/user/{{Auth::user()->id}}/details">My Details</a>
+                </li>
             </ul>
         </div>
     </div>

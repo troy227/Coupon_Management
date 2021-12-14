@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4088d928-4979-462e-a78f-3915de40fe09" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Coupon.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Coupon.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/details.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layout/coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layout/coupon.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -156,7 +158,7 @@
       <option name="presentableId" value="Default" />
       <updated>1639375919836</updated>
       <workItem from="1639375921834" duration="13454000" />
-      <workItem from="1639468782337" duration="1477000" />
+      <workItem from="1639468782337" duration="3552000" />
     </task>
     <servers />
   </component>
