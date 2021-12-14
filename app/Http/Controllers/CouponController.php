@@ -21,7 +21,8 @@ class CouponController extends Controller
     public function store(CouponRequest $request)
     {
         $request->validated();
-        Coupon::create($request->all());
+        //$request->request->add(['created_by' => ]);
+        Coupon::create($request->all() + ['created_by' => $request->user()->id]);
         session()->flash('success', 'Coupon created successfully.');
         return redirect('/coupons');
     }
