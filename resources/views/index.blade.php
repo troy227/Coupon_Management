@@ -1,3 +1,7 @@
+@php
+    use Carbon\Carbon;
+    $today_date = Carbon::today();
+@endphp
 @extends('layout.coupon')
 <title>Coupon Management System</title>
 @section('CouponContent')
@@ -16,8 +20,12 @@
                             @foreach($coupons as $coupon)
                                 <li class="list-group-item">
                                     {{$coupon->name}}
-                                    <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
+                                        <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
+                                    @if(($today_date->diffInDays($coupon->valid_until))<=0)
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"></button>
+                                    @endif
                                 </li>
+
                             @endforeach
                         </ul>
                     </div>
@@ -25,4 +33,5 @@
             </div>
         </div>
     </div>
+
 @endsection
