@@ -38,13 +38,13 @@
                             <div class="card-header">
                                 Valid From
                             </div>
-                            <input type="date" placeholder="Valid From"
-                                   onfocus="(this.type='date')" class="form-control" name="valid_from"
-                                   value="{{$coupon->valid_from}}">
+                            <input type="datetime" placeholder="Valid From"
+                                    onfocus="(this.type='date')" class="form-control" name="valid_from"
+                                    value="{{$coupon->valid_from}}">
                             <div class="card-header">
                                 Valid Until
                             </div>
-                            <input type="date" placeholder="Valid Until"
+                            <input type="datetime" placeholder="Valid Until"
                                    onfocus="(this.type='date')" class="form-control" name="valid_until"
                                    value="{{$coupon->valid_until}}">
                             <div class="card-header">
