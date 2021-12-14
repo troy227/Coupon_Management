@@ -19,9 +19,11 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
+                @if (Auth::user()->user_type=='Admin')
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/coupons/create">Create</a>
                 </li>
+                @endif
             </ul>
         </div>
     </div>

@@ -51,6 +51,7 @@
                         {{$coupon->max_redeem_per_user}}
                     </div>
                 </div>
+                @if (Auth::user()->user_type=='Admin')
                 <li class="list-group-item">
                     <form method="post" action="/coupons/{{$coupon->id}}/delete">
                         @csrf
@@ -58,6 +59,7 @@
                     </form>
                     <a href="/coupons/{{$coupon->id}}/edit" class="btn btn-primary my-2 btn-sm float-right">EDIT</a>
                 </li>
+                @endif
             </div>
         </div>
     </div>
