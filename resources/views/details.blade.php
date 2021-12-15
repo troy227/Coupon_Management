@@ -24,6 +24,17 @@
                     <div class="card-header">
                         Coupons Redeemed by {{$user->name}}
                     </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                @foreach($user->coupons as $coupon)
+                                    <li class="list-group-item">
+                                        @if($coupon->redeem()->pluck('times_redeemed')[0] > 0)
+                                        {{$coupon->name}}
+                                        <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
+                                        @endif
+                                    </li>
+                            @endforeach
+                        </div>
                 </div>
             </div>
         </div>
