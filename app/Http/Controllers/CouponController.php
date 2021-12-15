@@ -79,7 +79,7 @@ class CouponController extends Controller
         } else {
             $coupon->max_redeem -= 1;
             $coupon->save();
-            $redeems=$coupon->redeem()->where('user_id', '=', 1)->pluck('redeems')[0]-1;
+            $redeems=$coupon->redeem()->where('user_id', '=', $request->user()->id)->pluck('redeems')[0]-1;
             CouponUser::where('user_id', '=', $request->user()->id)->update(['redeems' => $redeems]);
             session()->flash('success', 'Coupon redeemed successfully.');
             return redirect('/coupons');
