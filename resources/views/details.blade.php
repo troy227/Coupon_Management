@@ -13,12 +13,13 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
-                            @foreach($user->coupons as $coupon)
+                            @foreach($user->getCoupons() as $coupon)
                                 <li class="list-group-item">
-                                    {{$coupon->name}}
+                                    <b>Name - </b> {{$coupon->name}} ||  <b>Coupon ID</b> {{$coupon->id}}
                                     <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
                                 </li>
                             @endforeach
+                        </ul>
                     </div>
                     @endif
                     <div class="card-header">
@@ -26,17 +27,18 @@
                     </div>
                         <div class="card-body">
                             <ul class="list-group">
-                                @foreach($user->coupons as $coupon)
+                                @foreach($user->redeem()->get() as $coupon)
                                     <li class="list-group-item">
-                                        @if($coupon->redeem()->pluck('times_redeemed')[0] > 0)
-                                        {{$coupon->name}}
-                                        <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
+                                        @if($coupon->times_redeemed>0)
+                                            <b>Coupon ID</b> {{$coupon->user_id}}
+                                            <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
                                         @endif
                                     </li>
-                            @endforeach
+                                @endforeach
+                            </ul>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 @endsection
