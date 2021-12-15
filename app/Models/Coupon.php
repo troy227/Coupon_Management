@@ -13,7 +13,12 @@ class Coupon extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function can_be_redeemed($user_id)
+    public function redeem()
+    {
+        return $this->hasMany(CouponUser::class, 'coupon_id');
+    }
+
+    public function can_be_redeemed($user_id): bool
     {
         if (str_contains($this->code, (string)$user_id)) {
             return true;

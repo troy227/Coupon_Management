@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Coupon::class, 'created_by');
     }
+
+    public function redeem()
+    {
+        return $this->hasMany(CouponUser::class, 'user_id');
+    }
 }
