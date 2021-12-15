@@ -24,10 +24,12 @@ class CouponController extends Controller
     {
         $request->validated();
         $couponId = Coupon::create($request->all() + ['created_by' => $request->user()->id])->id;
-        $couponUser = new CouponUser();
-        preg_match_all('!\d+!', $request['code'], $assignedUsers);
-        foreach ($assignedUsers[0] as $usersId) {
-            $couponUser->user_id = $usersId;
+
+        $stringId = filter_var($request['code'], FILTER_SANITIZE_NUMBER_INT);
+        $ids=str_split($stringId);
+        foreach ($ids as $usersId) {
+            $couponUser = new CouponUser();
+            $couponUser->user_id = (int)$usersId;
             $couponUser->coupon_id = $couponId;
             $couponUser->redeems = $request['max_redeem_per_user'];
             $couponUser->times_redeemed = 0;
@@ -74,14 +76,14 @@ class CouponController extends Controller
         if ($coupon->max_redeem == 0) {
             session()->flash('success', 'The coupon has been redeemed max number of times');
             return redirect('/coupons');
-        } elseif ($request->user()->redeem()->pluck('redeems')[0] <= 0) {
+        } elseif ($request->user()->redeem()->where('coupon_id', '=', $coupon->id)->pluck('redeems')[0] <= 0) {
             session()->flash('success', 'You have already redeemed this coupon max number of times');
             return redirect('/coupons');
         } else {
             $coupon->max_redeem -= 1;
             $coupon->save();
-            $redeems = $coupon->redeem()->pluck('redeems')[0] - 1;
-            $redeemed = $coupon->redeem()->pluck('times_redeemed')[0] + 1;
+            $redeems = $coupon->redeem()->where('coupon_id', '=', $coupon->id)->pluck('redeems')[0] - 1;
+            $redeemed = $coupon->redeem()->where('coupon_id', '=', $coupon->id)->pluck('times_redeemed')[0] + 1;
             CouponUser::where('user_id', '=', $request->user()->id)->where('coupon_id', '=', $coupon->id)
                 ->update(['redeems' => $redeems, 'times_redeemed' => $redeemed]);
             session()->flash('success', 'Coupon redeemed successfully.');
