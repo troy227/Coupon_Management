@@ -31,5 +31,5 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/coupons/{coupon}/update', 'CouponController@update');
 
 });
-
+Route::get('/send','MailController@basic_email');
 
