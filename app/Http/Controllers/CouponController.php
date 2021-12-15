@@ -30,6 +30,7 @@ class CouponController extends Controller
             $couponUser->user_id = $usersId;
             $couponUser->coupon_id = $couponId;
             $couponUser->redeems = $request['max_redeem_per_user'];
+            $couponUser->times_redeemed = 0;
             $couponUser->save();
         }
         session()->flash('success', 'Coupon created successfully.');
@@ -58,15 +59,15 @@ class CouponController extends Controller
         $request->validated();
         Coupon::whereId($coupon->id)->update($request->except(['_token']));
         preg_match_all('!\d+!', $request['code'], $assignedUsers);
-            CouponUser::where('user_id', '=', $request->user()->id)->update(array('redeems' => $request['max_redeem_per_user']));
+        CouponUser::where('user_id', '=', $request->user()->id)
+            ->update(['redeems' => $request['max_redeem_per_user'], 'times_redeemed' => 0]);
         session()->flash('success', 'Coupon updated successfully.');
         return redirect('/coupons');
     }
 
     public function redeem(Coupon $coupon, Request $request, CouponUser $couponUser)
     {
-        if (!$coupon->can_be_redeemed($request->user()->id))
-        {
+        if (!$coupon->can_be_redeemed($request->user()->id)) {
             session()->flash('success', 'You cannot redeem this coupon');
             return redirect('/coupons');
         }
@@ -79,8 +80,10 @@ class CouponController extends Controller
         } else {
             $coupon->max_redeem -= 1;
             $coupon->save();
-            $redeems=$coupon->redeem()->where('user_id', '=', $request->user()->id)->pluck('redeems')[0]-1;
-            CouponUser::where('user_id', '=', $request->user()->id)->update(['redeems' => $redeems]);
+            $redeems = $coupon->redeem()->pluck('redeems')[0] - 1;
+            $redeemed = $coupon->redeem()->pluck('times_redeemed')[0] + 1;
+            CouponUser::where('user_id', '=', $request->user()->id)->where('coupon_id', '=', $coupon->id)
+                ->update(['redeems' => $redeems, 'times_redeemed' => $redeemed]);
             session()->flash('success', 'Coupon redeemed successfully.');
             return redirect('/coupons');
         }
