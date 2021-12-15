@@ -51,15 +51,29 @@
                         {{$coupon->max_redeem_per_user}}
                     </div>
                 </div>
-                @if (Auth::user()->user_type=='Admin')
-                <li class="list-group-item">
-                    <form method="post" action="/coupons/{{$coupon->id}}/delete">
-                        @csrf
-                        <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
-                    </form>
-                    <a href="/coupons/{{$coupon->id}}/edit" class="btn btn-primary my-2 btn-sm float-right">EDIT</a>
-                </li>
-                @endif
+
+                <div class="container">
+                    <div class="row">
+                        @if (Auth::user()->user_type=='Admin')
+                        <div class="col-sm">
+                            <form method="post" action="/coupons/{{$coupon->id}}/delete">
+                                @csrf
+                                <input class="btn btn-danger btn-sm my-4" type="submit" value="DELETE">
+                            </form>
+                        </div>
+                        <div class="col-sm">
+                            <a href="/coupons/{{$coupon->id}}/edit" class="btn btn-primary my-4 btn-sm float-right">EDIT</a>
+                        </div>
+                        @endif
+                        <div class="col-sm">
+                            <form method="post" action="/coupons/{{$coupon->id}}/redeem">
+                                @csrf
+                                <input class="btn btn-success btn-sm my-4" type="submit" value="REDEEM" >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-header">
                     Created by :
                     <a href="/user/{{$coupon->user()->pluck('id')[0]}}/details">{{$coupon->user()->get()->pluck('name')[0]}}</a>

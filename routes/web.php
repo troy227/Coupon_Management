@@ -13,14 +13,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/coupons/create', 'CouponController@create');
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/coupons', 'CouponController@index');
     Route::get('/coupons/{coupon}', 'CouponController@show');
-
-
+    Route::get('/user/{user}/details', 'UserController@showDetails');
+    Route::post('/coupons/{coupon}/redeem', 'CouponController@redeem');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
@@ -29,6 +29,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::post('/coupons/{coupon}/delete', 'CouponController@delete');
     Route::get('/coupons/{coupon}/edit', 'CouponController@edit');
     Route::post('/coupons/{coupon}/update', 'CouponController@update');
+
 });
-Route::get('/coupons/create', 'CouponController@create');
-Route::get('/user/{user}/details', 'UserController@showDetails');
+
+

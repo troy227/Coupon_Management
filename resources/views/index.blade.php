@@ -25,7 +25,6 @@
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Coupon Expired</button>
                                     @endif
                                 </li>
-
                             @endforeach
                         </ul>
                     </div>
