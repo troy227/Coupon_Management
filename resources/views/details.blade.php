@@ -31,7 +31,7 @@
                                     <li class="list-group-item">
                                         @if($coupon->times_redeemed>0)
                                             <b>Coupon ID</b> {{$coupon->user_id}}
-                                            <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
+                                            <a href="/coupons/{{$coupon->coupon_id}}" class="btn btn-primary btn-sm float-right">View</a>
                                         @endif
                                     </li>
                                 @endforeach
