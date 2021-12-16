@@ -47,7 +47,7 @@ class Coupon extends Model
 
     public function redeem($userId)
     {
-        if ($this->redeemed_count($userId) == 0) {
+        if ($this->redeemed_count_user($userId)->isEmpty()) {
             CouponUser::create(['user_id' => $userId, 'coupon_id' => $this->id, 'redeems' => 1]);
         } else {
             $couponRedeems =  CouponUser::where('coupon_id', '=', $this->id)
