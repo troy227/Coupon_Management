@@ -47,9 +47,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(CouponUser::class, 'user_id');
     }
-
-    public function getCoupons()
-    {
-        return Coupon::get();
-    }
 }
