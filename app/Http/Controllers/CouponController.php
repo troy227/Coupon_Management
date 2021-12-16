@@ -6,6 +6,8 @@ use App\Http\Requests\CouponRequest;
 use App\Models\Coupon;
 use App\Models\CouponUser;
 use Illuminate\Http\Request;
+use App\Exceptions\CodeInvalidException;
+use Illuminate\Support\Facades\DB;
 
 class CouponController extends Controller
 {
@@ -23,8 +25,9 @@ class CouponController extends Controller
     public function store(CouponRequest $request)
     {
         $request->validated();
+        DB::beginTransaction();
+        try {
         $couponId = Coupon::create($request->all() + ['created_by' => $request->user()->id])->id;
-
         $stringId = filter_var($request['code'], FILTER_SANITIZE_NUMBER_INT);
         $ids=str_split($stringId);
         foreach ($ids as $usersId) {
@@ -35,6 +38,12 @@ class CouponController extends Controller
             $couponUser->times_redeemed = 0;
             $couponUser->save();
         }
+
+            } catch (\Illuminate\Database\QueryException $exception) {
+                DB::rollBack();
+                throw new CodeInvalidException();
+            }
+            DB::commit();
         session()->flash('success', 'Coupon created successfully.');
         return redirect('/coupons');
     }
