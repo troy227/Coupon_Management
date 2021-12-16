@@ -11,4 +11,7 @@ class UserController extends Controller
     {
         return view('details')->with('user', $user);
     }
+
+
+    
 }

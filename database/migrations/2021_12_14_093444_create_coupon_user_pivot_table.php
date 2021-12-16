@@ -22,6 +22,19 @@ class CreateCouponUserPivotTable extends Migration
             $table->integer('redeems');
             $table->timestamps();
         });
+
+        1,1, 2
+        2,1, 2
+
+
+        1,2,2
+
+
+
+        max_redeem = 4
+        max_redeem_per_user = 2
+
+        can_redeem(3)
     }
 
     /**

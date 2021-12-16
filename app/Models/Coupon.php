@@ -8,21 +8,31 @@ class Coupon extends Model
 {
     protected $guarded = [];
 
-    public function user()
+    public function created_by(): User
     {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function redeem()
-    {
-        return $this->hasMany(CouponUser::class, 'coupon_id');
+
+    function redeemed_count($userId = null): int{
+        // $this->id
+        // refer pivot table for answer
+        if(is_null($userId)){
+
+        }
     }
 
-    public function can_be_redeemed($user_id): bool
-    {
-        if (str_contains($this->code, (string)$user_id)) {
-            return true;
-        }
-        return false;
+    function can_redeem($userId): bool {
+
+    }
+
+    function redeem($userId): void {
+        // update values in pivot table
+
+    }
+
+
+    function is_expired(): bool {
+
     }
 }
