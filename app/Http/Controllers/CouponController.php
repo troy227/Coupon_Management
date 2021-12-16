@@ -36,12 +36,14 @@ class CouponController extends Controller
             $couponUser->coupon_id = $couponId;
             $couponUser->redeems = $request['max_redeem_per_user'];
             $couponUser->times_redeemed = 0;
+            $couponUser->save();
         }
-                $couponUser->save();
+
             } catch (\Illuminate\Database\QueryException $exception) {
                 DB::rollBack();
                 throw new CodeInvalidException();
             }
+            DB::commit();
         session()->flash('success', 'Coupon created successfully.');
         return redirect('/coupons');
     }
