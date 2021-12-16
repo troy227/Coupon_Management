@@ -76,7 +76,7 @@
 
                 <div class="card-header">
                     Created by :
-                    <a href="/user/{{$coupon->user()->pluck('id')[0]}}/details">{{$coupon->user()->get()->pluck('name')[0]}}</a>
+                    <a href="/user/{{$coupon->created_by()->pluck('id')[0]}}/details">{{$coupon->created_by()->get()->pluck('name')[0]}}</a>
                 </div>
             </div>
         </div>

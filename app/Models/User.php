@@ -38,18 +38,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function coupons()
+    public function created_coupons()
     {
         return $this->hasMany(Coupon::class, 'created_by');
     }
 
-    public function redeem()
+    public function get_redeemable_coupons()
     {
-        return $this->hasMany(CouponUser::class, 'user_id');
+        return Coupon::all()->where('user_id', '=', $this->id);
     }
 
-    public function getCoupons()
+    public function get_redeemed_coupons()
     {
-        return Coupon::get();
+        return CouponUser::all()->where('user_id', '=', $this->id)->where('redeems', '>', 0);
     }
 }

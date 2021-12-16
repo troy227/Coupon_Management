@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/coupons', 'CouponController@index');
     Route::get('/coupons/{coupon}', 'CouponController@show');
     Route::get('/user/{user}/details', 'UserController@showDetails');
-    Route::post('/coupons/{coupon}/redeem', 'CouponController@redeem');
+    Route::post('/coupons/{coupon}/redeem', 'CouponController@redeemCoupon');
 });
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
