@@ -16,7 +16,7 @@ class Coupon extends Model
 
     public function redeemed_count($userId)
     {
-        $checkUser = CouponUser::all()->where('coupon_id', '=', $this->id)->where('user_id', '=', $userId)->isEmpty();
+        $checkUser = CouponUser::all()->where('coupon_id', '=', $this->id)->isEmpty();
         if ($checkUser) {
             return 0;
         }
