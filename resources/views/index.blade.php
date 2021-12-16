@@ -23,6 +23,8 @@
                                         <a href="/coupons/{{$coupon->id}}" class="btn btn-primary btn-sm float-right">View</a>
                                     @if(($today_date->diffInDays($coupon->valid_until))<=0)
                                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal">Coupon Expired</button>
+                                    @elseif(($today_date->diffInDays($coupon->valid_until))>0 and $today_date->diffInDays($coupon->valid_until)<=3)
+                                        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal">Coupon About to expire</button>
                                     @endif
                                 </li>
                             @endforeach
