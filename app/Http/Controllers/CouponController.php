@@ -33,6 +33,7 @@ class CouponController extends Controller
         session()->flash('success', 'Coupon deleted successfully.');
         return redirect('/coupons');
     }
+
     public function edit(Coupon $coupon)
     {
         return view('edit')->with('coupon', $coupon);
