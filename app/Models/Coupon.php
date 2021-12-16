@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Models\CouponUser;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Coupon extends Model
 {
@@ -15,13 +14,13 @@ class Coupon extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function redeemed_count()
+    public function redeemed_count($userId)
     {
-        $checkUser = CouponUser::where('coupon_id', '=', $this->id)->get()->isEmpty();
+        $checkUser = CouponUser::all()->where('coupon_id', '=', $this->id)->isEmpty();
         if ($checkUser) {
             return 0;
         }
-        return CouponUser::where('coupon_id', '=', $this->id)->sum('redeems');
+        return CouponUser::all()->where('coupon_id', '=', $this->id)->sum('redeems');
     }
 
     public function redeemed_count_user($userId)
@@ -33,7 +32,7 @@ class Coupon extends Model
 
     public function can_redeem($userId)
     {
-        if (str_contains($this->code, (string)$userId) && $this->redeemed_count() < $this->max_redeem) {
+        if (str_contains($this->code, (string)$userId) && $this->redeemed_count($userId) < $this->max_redeem) {
                 if ($this->redeemed_count_user($userId)->isEmpty())
                 {
                     return true;
@@ -51,9 +50,12 @@ class Coupon extends Model
         if ($this->redeemed_count_user($userId)->isEmpty()) {
             CouponUser::create(['user_id' => $userId, 'coupon_id' => $this->id, 'redeems' => 1]);
         } else {
+            $couponRedeems =  CouponUser::where('coupon_id', '=', $this->id)
+                ->where('user_id', '=', $userId)
+                ->pluck('redeems')[0];
             CouponUser::where('coupon_id', '=', $this->id)
                 ->where('user_id', '=', $userId)
-                ->update(['redeems' => DB::raw('redeems+1')]);
+                ->update(['redeems' => $couponRedeems+1]);
         }
 
     }
